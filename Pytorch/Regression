@@ -1,3 +1,5 @@
+# Use neural network to Approximate quadratic function
+
 import torch
 import torch.nn.functional as F
 import matplotlib.pyplot as plt
