@@ -36,7 +36,8 @@ def distance_Manhattan(x1, x2):
 dis_Euc = np.array(list(map(lambda x: [distance_Euc(x, y) for y in data], data)))
 dis_Manhattan = np.array(list(map(lambda x: [distance_Manhattan(x, y) for y in data], data)))
 
-# Another way to get Euclidean distance. Note that ||x1 − x2 ||2 = ||x1 ||2 + ||x2 ||2 − 2 ∗ xT1 · x2 . I can use matrix algebra to calculate Euclidean distance matrix directly.
+# Another way to get Euclidean distance. Note that ||x1 − x2 ||2 = ||x1 ||2 + ||x2 ||2 − 2 ∗ xT1 · x2 . I can use 
+# matrix algebra to calculate Euclidean distance matrix directly.
 # When the dataset is huge, this method can save a lot of time. # Same with above result running this chunk.
 # Euclidean Norm of each data points: shape of (N * 1)
 norm = np.sum(data ** 2, axis = 1).reshape(N, 1)
@@ -44,7 +45,9 @@ norm_matrix = norm.dot(np.ones(N).reshape(1, N)) # (N * N)
 dis_Euc = np.sqrt(norm_matrix + norm_matrix.T - 2 * data.dot(data.T))
 
 #Normalization
-# Attributes have the potential to dominate in the contribution to the distance measure, so I normalize the data and calculate two distance again for further use. Data are substracted by mean of each attribute and divided by standard error of each attribute.
+# Attributes have the potential to dominate in the contribution to the distance measure, so I normalize the data and 
+# calculate two distance again for further use. Data are substracted by mean of each attribute and divided by standard error 
+# of each attribute.
 # Centralization and Normalization
 data_normlized = (data - np.mean(data,axis=0)) / np.std(data,axis=0)
 dis_Euc_normlized = np.array(list(map(lambda x: [distance_Euc(x, y) for y in data_normlized], data_normlized)))
@@ -119,7 +122,10 @@ plt.xlabel('K')
 plt.ylabel('Accuracy')
 plt.show()
 
-#It looks that normalization does not help a lot. This may because the last attribute, which is relatively small in scale, does not contain much information. Manhattan distance and Euclidean distance are similar in results. All the model behave well when K < 50, and this is because model lose local structure information when K is too large. It is worth notice that, revised model gives good result for any K, suggesting mean regression brings robustness to the KNN algorithm.
+# It looks that normalization does not help a lot. This may because the last attribute, which is relatively small in scale,
+# does not contain much information. Manhattan distance and Euclidean distance are similar in results. All the model 
+# behave well when K < 50, and this is because model lose local structure information when K is too large. It is worth notice 
+# that, revised model gives good result for any K, suggesting mean regression brings robustness to the KNN algorithm.
 
 # Numerical
 # Find the 10 most analogous data instances of each data, show their index, label and Euclidean distances.
@@ -127,5 +133,6 @@ K = 10
 dis, ind, lab, acc = KNN(K, data, label, dis_Euc)
 for i in [0, 1, 2, 50, 51, 52, 100, 101, 102]:
     for j in range(K):
-        print(' %d analogous data points for data %d(%s): %d(%s) with distnace %.2f '% (K, i, label[i], ind[i][j], lab[i][j], dis[i][j]))
+        print(' %d analogous data points for data %d(%s): %d(%s) with distnace %.2f '% (K, i, label[i], ind[i][j], 
+                                                                                        lab[i][j], dis[i][j]))
 
