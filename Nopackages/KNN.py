@@ -1,5 +1,6 @@
 # The data sets contains 150 points of 3 different labels(known).
 # Use KNN to classify them.(same train and test sets)
+# Accuracy gained: 98%.
 
 import numpy as np
 import matplotlib.pyplot as plt
